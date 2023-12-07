@@ -1,33 +1,62 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Import Link from react-router-dom
-
+import React, { useState, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [email, setEmail] = useState(''); // Assuming you want to collect email
-    // You can also include state for error messages or confirmation messages
+    const [errorMessage, setErrorMessage] = useState('');
+    const [email, setEmail] = useState('');
     const navigate = useNavigate();
+    const { setIsAuthenticated } = useContext(AuthContext);
 
-    const handleRegister = (e) => {
-        e.preventDefault();
-        // Implement your registration logic here
-        // On successful registration, you might want to navigate to the login page or dashboard
-      };
+    const handleRegister = async (e) => {
+      e.preventDefault();
+      if (!username || !password || !email) {
+        setErrorMessage('Please fill in the missing fields');
+        return;
+      }
+      try {
+          const response = await fetch('http://localhost:3001/register', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ username, email, password }),
+          });
+          
+          if (response.ok) {
+              setIsAuthenticated(true); // Update authentication state
+              navigate('/dashboard'); // Navigate to dashboard
+          } else {
+              if (response.status === 409) { // Assuming 409 status code for existing user
+                  setErrorMessage('Username or email already exists');
+              } else {
+                  setErrorMessage('Registration failed. Please try again later.');
+              }
+          }
+      } catch (error) {
+          console.error('There was an error:', error);
+          setErrorMessage('An error occurred during registration');
+      }
+  };
+  
 
-      return (
-        <div className="login-container"> {/* Consider renaming this class to a more generic name like 'auth-container' */}
-          <form onSubmit={handleRegister} className="input-form">
-            <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} />
-            <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-            <button type="submit">Register</button>
-          </form>
-          <p>
-            Already have an account? <Link to="/">Login here</Link> {/* Add this line for the login link */}
-          </p>
-        </div>
-      );
-    };
+  return (
+    <div className="login-container">
+      <form onSubmit={handleRegister} className="input-form">
+        <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} />
+        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+        <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+        <button type="submit">Register</button>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+      </form>
+      <p>
+        Already have an account? <Link to="/">Login here</Link>
+      </p>
+    </div>
+);
+
+};
 
 export default Register;

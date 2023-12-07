@@ -21,6 +21,14 @@
 
   /* Animation durations */
   --logo-spin-duration: 20s;
+
+    /* Error Message Styling */
+    --error-color: #ff0033;
+    --error-font-size: 0.9em;
+    --error-margin: 10px 0;
+    --error-padding: 5px;
+    --error-border-radius: 5px;
+    --error-background: #ffd1d1;
 }
 
 .App {
@@ -97,6 +105,17 @@
 .App-link {
   color: var(--link-color);
 }
+
+.error-message {
+  color: var(--error-color);
+  font-size: var(--error-font-size);
+  margin: var(--error-margin);
+  padding: var(--error-padding);
+  border-radius: var(--error-border-radius);
+  background-color: var(--error-background);
+  text-align: center; /* Center the text */
+}
+
 
 @keyframes App-logo-spin {
   from {
