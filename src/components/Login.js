@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import credentials from '../credentials.json';
 
@@ -10,17 +9,30 @@ const Login = () => {
   const [message, setMessage] = useState(null);
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('isAuthenticated'); // remove value from localStorage
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
     const user = credentials.find((cred) => cred.username === username && cred.password === password);
     if (user) {
       setIsAuthenticated(true);
-      navigate('/dashboard');
+      localStorage.setItem('isAuthenticated', 'true'); // set value in localStorage
+      navigate('/dashboard', { replace: true });
     } else {
       setMessage('Invalid credentials');
     }
   };
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem('isAuthenticated'); // get value from localStorage
+    if (authStatus) {
+      setIsAuthenticated(true);
+      navigate('/dashboard', { replace: true });
+    }
+  }, []);
 
   if (isAuthenticated) {
     navigate('/dashboard');
