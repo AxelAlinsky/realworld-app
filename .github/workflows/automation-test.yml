@@ -1,0 +1,25 @@
+name: Run Automation Tests
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Website Repository
+      uses: actions/checkout@v2
+      with:
+        repository: 'AxelAlinsky/realworld-app'
+
+    - name: Checkout Automation Repository
+      uses: actions/checkout@v2
+      with:
+        repository: 'AxelAlinsky/realworldApp-workspace-automation'
+        path: 'automation'
+
+    - name: Run Automation Tests
+      run: |
+        cd automation
+        git
+        npm run regression
