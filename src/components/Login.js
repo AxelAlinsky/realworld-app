@@ -1,4 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { AuthContext } from '../contexts/AuthContext';
 import credentials from '../data/credentials.json';
 
@@ -9,6 +10,7 @@ const Login = () => {
   const [message, setMessage] = useState(null);
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const handleLogout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem('isAuthenticated'); // remove value from localStorage
@@ -39,13 +41,16 @@ const Login = () => {
   }
 
   return (
-    <div className="login-container ">
+    <div className="login-container">
       <form onSubmit={handleLogin} className="input-form">
         <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} />
         <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
         <button type="submit">Login</button>
       </form>
       {message && <p>{message}</p>}
+      <p>
+        Don't have an account? <Link to="/register">Register here</Link>
+      </p> {/* Add this line for the register link */}
     </div>
   );
 };
