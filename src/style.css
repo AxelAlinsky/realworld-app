@@ -22,13 +22,21 @@
   /* Animation durations */
   --logo-spin-duration: 20s;
 
-    /* Error Message Styling */
-    --error-color: #ff0033;
-    --error-font-size: 0.9em;
-    --error-margin: 10px 0;
-    --error-padding: 5px;
-    --error-border-radius: 5px;
-    --error-background: #ffd1d1;
+  /* Error Message Styling */
+  --error-color: #ff0033;
+  --error-font-size: 0.9em;
+  --error-margin: 10px 0;
+  --error-padding: 5px;
+  --error-border-radius: 5px;
+  --error-background: #ffd1d1;
+
+  /* Dashboard Styling */
+  --dashboard-bg-color: #f6f8fa;
+  --dashboard-header-bg-color: #24292e;
+  --dashboard-header-color: #fff;
+  --dashboard-content-margin-top: 20px;
+  --logout-button-bg-color: #f9826c;
+  --logout-button-hover-bg-color: #da5a45;
 }
 
 .App {
@@ -124,4 +132,44 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* Dashboard */
+.dashboard-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: var(--dashboard-bg-color);
+  min-height: 100vh;
+  padding: var(--default-padding);
+}
+
+.dashboard-header {
+  background-color: var(--dashboard-header-bg-color);
+  color: var(--dashboard-header-color);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+}
+
+.logout-button {
+  background-color: var(--button-bg-color);
+  color: white;
+  border: none;
+  padding: var(--button-padding);
+  border-radius: var(--default-border-radius);
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+.dashboard-content {
+  margin-top: var(--dashboard-content-margin-top);
 }

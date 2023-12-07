@@ -14,14 +14,19 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated'); // remove value from localStorage
+    localStorage.removeItem('isAuthenticated');
     navigate('/', { replace: true });
   };
 
   return (
-    <div>
-      <h1>Welcome to the Dashboard!</h1>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <h1>Welcome to the Dashboard!</h1>
+        <button onClick={handleLogout} className="logout-button">Logout</button>
+      </header>
+      <main className="dashboard-content">
+
+      </main>
     </div>
   );
 };

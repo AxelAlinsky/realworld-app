@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { useNavigate, Link } from 'react-router-dom'; 
 import { AuthContext } from '../contexts/AuthContext.js';
 import credentials from '../data/credentials.json';
 
@@ -13,7 +13,7 @@ const Login = () => {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated'); // remove value from localStorage
+    localStorage.removeItem('isAuthenticated'); 
   };
 
   const handleLogin = (e) => {
@@ -23,14 +23,13 @@ const Login = () => {
       return;
     }
 
-    // Search for a user where the input matches either the username or the email
     const user = credentials.users.find((cred) => 
       (cred.username === username || cred.email === username) && cred.password === password
     );
   
     if (user) {
       setIsAuthenticated(true);
-      localStorage.setItem('isAuthenticated', 'true'); // set value in localStorage
+      localStorage.setItem('isAuthenticated', 'true'); 
       navigate('/dashboard', { replace: true });
     } else {
       setMessage('Invalid credentials');
@@ -38,7 +37,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    const authStatus = localStorage.getItem('isAuthenticated'); // get value from localStorage
+    const authStatus = localStorage.getItem('isAuthenticated'); 
     if (authStatus) {
       setIsAuthenticated(true);
       navigate('/dashboard', { replace: true });
@@ -55,7 +54,7 @@ const Login = () => {
         <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} />
         <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
         <button type="submit">Login</button>
-        {message && <p className="error-message">{message}</p>} {/* Apply error-message class here */}
+        {message && <p className="error-message">{message}</p>}
       </form>
       <p>
         Don't have an account? <Link to="/register">Register here</Link>

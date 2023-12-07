@@ -14,7 +14,6 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} /> 
         <Route path="/dashboard" element={<Dashboard />} />
-        {/* You can also include ProtectedRoute for routes that require authentication */}
       </Routes>
     </Router>
   );

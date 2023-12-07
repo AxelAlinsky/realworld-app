@@ -26,10 +26,10 @@ const Register = () => {
           });
           
           if (response.ok) {
-              setIsAuthenticated(true); // Update authentication state
-              navigate('/dashboard'); // Navigate to dashboard
+              setIsAuthenticated(true); 
+              navigate('/dashboard'); 
           } else {
-              if (response.status === 409) { // Assuming 409 status code for existing user
+              if (response.status === 409) { 
                   setErrorMessage('Username or email already exists');
               } else {
                   setErrorMessage('Registration failed. Please try again later.');
