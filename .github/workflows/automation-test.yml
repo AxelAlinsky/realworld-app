@@ -18,7 +18,23 @@ jobs:
         repository: 'AxelAlinsky/realworldApp-workspace-automation'
         path: 'realworldApp-workspace-automation'
 
-    - name: Run Automation Tests
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18.x'
+
+    - name: Install Dependencies
       run: |
         cd realworldApp-workspace-automation
+        npm install
+
+    - name : Build Automation Scripts
+      run: |
+        npm run build
+
+    - name: Set up Chrome
+      uses: browser-actions/setup-chrome@latest
+
+    - name: Run Automation Tests
+      run: |
         npm run regression
