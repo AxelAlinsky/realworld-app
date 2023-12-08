@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: 'AxelAlinsky/realworldApp-workspace-automation'
-        path: 'automation'
+        path: 'realworldApp-workspace-automation'
 
     - name: Run Automation Tests
       run: |
