@@ -11,10 +11,10 @@ const Login = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated'); 
-  };
+  // const handleLogout = () => {
+  //   setIsAuthenticated(false);
+  //   localStorage.removeItem('isAuthenticated'); 
+  // };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -42,7 +42,8 @@ const Login = () => {
       setIsAuthenticated(true);
       navigate('/dashboard', { replace: true });
     }
-  }, []);
+  }, [setIsAuthenticated, navigate]); // Added missing dependencies
+
 
   if (isAuthenticated) {
     navigate('/dashboard');
