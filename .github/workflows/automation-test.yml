@@ -42,6 +42,11 @@ jobs:
     - name: Set up Chrome
       uses: browser-actions/setup-chrome@latest
 
+    - name: Run build
+      run: |
+        cd realworldApp-workspace-automation
+        npm run build
+
     - name: Run Automation Tests
       run: |
         cd realworldApp-workspace-automation
