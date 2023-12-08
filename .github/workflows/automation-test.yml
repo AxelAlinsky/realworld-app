@@ -11,6 +11,17 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: 'AxelAlinsky/realworld-app'
+        path: 'realworld-app'
+
+    - name: Install Website Dependencies
+      run: |
+        cd realworld-app
+        npm install
+
+    - name: Build Website
+      run: |
+        cd realworld-app
+        npm run build
 
     - name: Checkout Automation Repository
       uses: actions/checkout@v2
@@ -23,18 +34,15 @@ jobs:
       with:
         node-version: '18.x'
 
-    - name: Install Dependencies
+    - name: Install Automation Dependencies
       run: |
         cd realworldApp-workspace-automation
         npm install
-
-    - name : Build Automation Scripts
-      run: |
-        npm run build
 
     - name: Set up Chrome
       uses: browser-actions/setup-chrome@latest
 
     - name: Run Automation Tests
       run: |
+        cd realworldApp-workspace-automation
         npm run regression
