@@ -20,6 +20,5 @@ jobs:
 
     - name: Run Automation Tests
       run: |
-        cd automation
-        git
+        cd realworldApp-workspace-automation
         npm run regression
