@@ -1,40 +1,56 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; 
 import { AuthContext } from '../contexts/AuthContext.js';
-import credentials from '../data/credentials.json';
-
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState('');
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // const handleLogout = () => {
-  //   setIsAuthenticated(false);
-  //   localStorage.removeItem('isAuthenticated'); 
-  // };
 
-  const handleLogin = (e) => {
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (!username || !password) {
-      setMessage('Please enter both username and password');
-      return;
+        setMessage('Please enter both username and password');
+        return;
     }
 
-    const user = credentials.users.find((cred) => 
-      (cred.username === username || cred.email === username) && cred.password === password
-    );
-  
-    if (user) {
-      setIsAuthenticated(true);
-      localStorage.setItem('isAuthenticated', 'true'); 
-      navigate('/dashboard', { replace: true });
-    } else {
-      setMessage('Invalid credentials');
+    try {
+        const response = await fetch('http://localhost:3001/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
+
+        try {
+            const data = await response.json(); // Attempt to parse the response as JSON
+            if (response.ok) {
+                if (data.isAuthenticated) {
+                    setIsAuthenticated(true);
+                    localStorage.setItem('isAuthenticated', 'true');
+                    navigate('/dashboard', { replace: true });
+                } else {
+                    setMessage(data.message || 'Invalid credentials');
+                }
+            } else {
+                setMessage(data.message || 'Login failed. Please try again later.');
+            }
+        } catch (error) {
+            console.error('Error parsing response:', error);
+            setMessage('An error occurred during login');
+        }
+    } catch (error) {
+        console.error('There was an error:', error);
+        setMessage('An error occurred during login');
     }
-  };
+};
+
+
 
   useEffect(() => {
     const authStatus = localStorage.getItem('isAuthenticated'); 
@@ -42,8 +58,7 @@ const Login = () => {
       setIsAuthenticated(true);
       navigate('/dashboard', { replace: true });
     }
-  }, [setIsAuthenticated, navigate]); // Added missing dependencies
-
+  }, [setIsAuthenticated, navigate]);
 
   if (isAuthenticated) {
     navigate('/dashboard');
@@ -61,6 +76,7 @@ const Login = () => {
         Don't have an account? <Link to="/register">Register here</Link>
       </p>
     </div>
-  );  
+  );
 };
+
 export default Login;

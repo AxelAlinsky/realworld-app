@@ -26,6 +26,7 @@ const Register = () => {
           });
           
           if (response.ok) {
+            console.log('Registration successful for:', username); // Log after successful registration
               setIsAuthenticated(true); 
               navigate('/dashboard'); 
           } else {
