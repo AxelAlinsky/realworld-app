@@ -11,9 +11,10 @@ app.use(cors());
 
 // Configure CORS for your front-end URL
 app.use(cors({
-    origin: 'https://realworld-app-nine.vercel.app/', 
+    origin: 'https://realworld-app-nine.vercel.app',
     optionsSuccessStatus: 200
 }));
+
 
 async function startServer() {
     const connection = await mysql.createConnection({
