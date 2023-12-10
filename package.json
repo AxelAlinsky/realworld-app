@@ -18,15 +18,14 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "concurrently": "^8.2.2"
   },
   "scripts": {
     "start": "node server.js",
-    "start-dev": "concurrently \"react-scripts start\" \"node server.js\"", 
+    "dev": "concurrently \"react-scripts start\" \"node server.js\"", 
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "start-server": "node server.js",
-    "dev": "concurrently \"npm start\" \"npm run start-server\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,7 +47,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "concurrently": "^8.2.2"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
