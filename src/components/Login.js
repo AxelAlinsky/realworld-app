@@ -30,7 +30,7 @@ const Login = () => {
         });
 
         try {
-            const data = await response.json(); // Attempt to parse the response as JSON
+            const data = await response.json();
             if (response.ok) {
                 if (data.isAuthenticated) {
                     setIsAuthenticated(true);

@@ -89,7 +89,7 @@ async function startServer() {
                 }
             } else {
                 console.log('No user found with username:', username);
-                res.status(404).send('User not found');
+                res.status(401).send('Invalid credentials');
             }
         } catch (error) {
             console.error('Error during login:', error);
