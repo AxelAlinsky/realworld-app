@@ -173,3 +173,24 @@
 .dashboard-content {
   margin-top: var(--dashboard-content-margin-top);
 }
+
+.alert-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #ff5733; /* Vivid color for attention */
+  color: white; /* Contrast text color */
+  text-align: center;
+  padding: 12px;
+  border-top-left-radius: var(--default-border-radius);
+  border-top-right-radius: var(--default-border-radius);
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: bold; /* Make text bold */
+  font-size: 1.2em; /* Larger text for better visibility */
+}
+
+.alert-icon {
+  margin-right: 8px; /* Space between icon and text */
+  font-size: 1.4em; /* Slightly larger icon */
+}
