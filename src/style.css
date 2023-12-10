@@ -1,12 +1,12 @@
 :root {
   /* Define your color scheme */
-  --primary-bg-color: #282c34;
-  --secondary-bg-color: #f6f8fa;
-  --button-bg-color: #2ea44f;
-  --button-hover-bg-color: #2c974b;
-  --border-color: #d1d5da;
-  --text-color: white;
-  --link-color: #546d74;
+  --primary-bg-color: #0d1117; /* GitHub Dark Background */
+  --secondary-bg-color: #161b22; /* Slightly lighter for contrast */
+  --button-bg-color: #238636; /* GitHub Green */
+  --button-hover-bg-color: #2ea043; /* Slightly lighter green for hover */
+  --border-color: #30363d; /* Subtle borders */
+  --text-color: #c9d1d9; /* Light text for contrast */
+  --link-color: #58a6ff; /* GitHub link color */
 
   /* Font sizes */
   --font-size-small: 14px;
@@ -31,7 +31,7 @@
   --error-background: #ffd1d1;
 
   /* Dashboard Styling */
-  --dashboard-bg-color: #f6f8fa;
+  --dashboard-bg-color: var(--primary-bg-color);
   --dashboard-header-bg-color: #24292e;
   --dashboard-header-color: #fff;
   --dashboard-content-margin-top: 20px;
@@ -65,29 +65,33 @@
   color: var(--text-color);
 }
 
-.login-container {
+.login-container, .register-container {
+  background-color: var(--primary-bg-color);
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  background-color: var(--secondary-bg-color);
 }
 
 .input-form {
+  background-color: var(--secondary-bg-color);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   width: 340px;
   padding: var(--default-padding);
-  background-color: var(--text-color);
   border: 1px solid var(--border-color);
   border-radius: var(--default-border-radius);
 }
 
-.input-form input {
+.input-form input, .input-form button {
+  background-color: #21262d;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
   padding: var(--input-padding);
   margin-bottom: var(--input-margin-bottom);
-  border: 1px solid var(--border-color);
   border-radius: var(--default-border-radius);
   font-size: var(--font-size-small);
 }
@@ -95,7 +99,6 @@
 .input-form button {
   padding: var(--button-padding);
   background-color: var(--button-bg-color);
-  color: var(--text-color);
   border: none;
   border-radius: var(--default-border-radius);
   font-size: var(--font-size-small);
@@ -121,9 +124,8 @@
   padding: var(--error-padding);
   border-radius: var(--error-border-radius);
   background-color: var(--error-background);
-  text-align: center; /* Center the text */
+  text-align: center;
 }
-
 
 @keyframes App-logo-spin {
   from {
@@ -134,11 +136,10 @@
   }
 }
 
-
 /* Dashboard */
 .dashboard-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
+  color: var(--text-color);
   background-color: var(--dashboard-bg-color);
   min-height: 100vh;
   padding: var(--default-padding);
@@ -158,7 +159,7 @@
 }
 
 .logout-button {
-  background-color: var(--button-bg-color);
+  background-color: var(--logout-button-bg-color);
   color: white;
   border: none;
   padding: var(--button-padding);
@@ -167,7 +168,7 @@
 }
 
 .logout-button:hover {
-  background-color: var(--button-hover-bg-color);
+  background-color: var(--logout-button-hover-bg-color);
 }
 
 .dashboard-content {
@@ -179,18 +180,18 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #ff5733; /* Vivid color for attention */
-  color: white; /* Contrast text color */
+  background-color: #161b22; /* Slightly lighter dark shade for footer */
+  color: white;
   text-align: center;
   padding: 12px;
   border-top-left-radius: var(--default-border-radius);
   border-top-right-radius: var(--default-border-radius);
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
-  font-weight: bold; /* Make text bold */
-  font-size: 1.2em; /* Larger text for better visibility */
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .alert-icon {
-  margin-right: 8px; /* Space between icon and text */
-  font-size: 1.4em; /* Slightly larger icon */
+  margin-right: 8px;
+  font-size: 1.4em;
 }
