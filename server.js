@@ -4,26 +4,34 @@ const mysql = require('mysql2/promise');
 const cors = require('cors');
 require('dotenv').config();
 
-
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = ['https://realworld-app-nine.vercel.app', 'http://localhost:3000'];
 
 // Configure CORS for your front-end URL
 app.use(cors({
-    origin: 'https://realworld-app-nine.vercel.app',
+    origin: function(origin, callback){
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if(!origin) return callback(null, true);
+      if(allowedOrigins.indexOf(origin) === -1){
+        var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
     optionsSuccessStatus: 200
 }));
 
-
 async function startServer() {
-    const connection = await mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE,
-        port: process.env.DB_PORT || 3306
-    });
+    try {
+        const connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_DATABASE,
+            port: process.env.DB_PORT || 3306
+        });
 
     // Register endpoint
     app.post('/register', async (req, res) => {
@@ -95,6 +103,9 @@ async function startServer() {
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
     });
+    } catch (err) {
+        console.error('Failed to start server:', err);
+    }
 }
 
 // Handle errors during server start
