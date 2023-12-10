@@ -17,8 +17,8 @@ const Register = () => {
         return;
       }
       try {
-          const response = await fetch('https://realworldapp.herokuapp.com/register', {
-              method: 'POST',
+        const response = await fetch('https://realworldapp-fbe9683d7507.herokuapp.com/register', {
+          method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
               },
