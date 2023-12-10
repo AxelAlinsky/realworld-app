@@ -81,8 +81,8 @@ const Login = () => {
             {isLoading ? 'Loading...' : 'Login'} {/* Conditional rendering */}
           </button>
           
-          {message && <p className="error-message">{message}</p>}
-        </form>
+          {message && <p className="error-message" data-testid="error-message">{message}</p>}
+          </form>
         <p>
           Don't have an account? <Link to="/register">Register here</Link>
         </p>
