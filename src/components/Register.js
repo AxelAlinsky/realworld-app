@@ -49,22 +49,22 @@ const Register = () => {
   return (
     <div className="login-container">
       <form onSubmit={handleRegister} className="input-form">
-        <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} />
-        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+        <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} data-testid="register-username-input" />
+        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} data-testid="register-email-input" />
+        <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} data-testid="register-password-input" />
         
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" disabled={isLoading} data-testid="register-button">
           {isLoading ? 'Registering...' : 'Register'} {/* Conditional rendering */}
         </button>
         
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
+        {errorMessage && <div className="error-message" data-testid="error-message">{errorMessage}</div>}
       </form>
-      <p>
-        Already have an account? <Link to="/">Login here</Link>
+      <p data-testid="login-message">
+        Already have an account? <Link to="/" data-testid="login-link">Login here</Link>
       </p>
-      <div className="alert-footer">
-        <span className="alert-icon">&#9888;</span> {/* Exclamation mark icon */}
-        <p>Please note: This is a demo application. Avoid using real personal details for login or registration.</p>
+      <div className="alert-footer" data-testid="alert-footer">
+          <span className="alert-icon" data-testid="alert-icon">&#9888;</span> {/* Example: Exclamation mark icon */}
+          <p data-testid="alert-message">Please note: This is a demo application. Avoid using real personal details for login or registration.</p>
       </div>
     </div>
   );

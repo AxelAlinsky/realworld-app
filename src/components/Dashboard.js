@@ -21,8 +21,8 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <h1>Welcome to the Dashboard!</h1>
-        <button onClick={handleLogout} className="logout-button">Logout</button>
+        <h1 data-testid="dashboard-title">Welcome to the Dashboard!</h1>
+        <button onClick={handleLogout} className="logout-button" data-testid="logout-button">Logout</button>
       </header>
       <main className="dashboard-content">
 
