@@ -21,15 +21,17 @@ const Login = () => {
 
     setIsLoading(true); // Start loading
     try {
-      const response = await fetch('https://realworldapp-fbe9683d7507.herokuapp.com/login', {
-        method: 'POST',
+        const response = await fetch('https://realworldapp-fbe9683d7507.herokuapp.com/login', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ username, password }),
         });
 
-        try {
+        // Check if the response is JSON
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
             const data = await response.json();
             if (response.ok) {
                 if (data.isAuthenticated) {
@@ -42,15 +44,16 @@ const Login = () => {
             } else {
                 setMessage(data.message || 'Login failed. Please try again later.');
             }
-        } catch (error) {
-            console.error('Error parsing response:', error);
-            setMessage('An error occurred during login');
+        } else {
+            // Handle non-JSON response (like plain text)
+            const text = await response.text();
+            setMessage(text || 'An error occurred during login');
         }
     } catch (error) {
         console.error('There was an error:', error);
         setMessage('An error occurred during login');
     } finally {
-      setIsLoading(false); // Stop loading
+        setIsLoading(false); // Stop loading
     }
 };
 
