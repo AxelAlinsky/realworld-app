@@ -88,7 +88,7 @@ const Login = () => {
         </p>
         <div className="alert-footer" data-testid="alert-footer">
           <span className="alert-icon" data-testid="alert-icon">&#9888;</span> {/* Example: Exclamation mark icon */}
-          <p data-testid="alert-message">Please note: This is a demo application. Avoid using real personal details for login or registration.</p>
+          <p data-testid="alert-message">Important: This is a demo application. Do not use real personal details for login or registration. Server response may be slow due to database limitations.</p>
         </div>
       </div>
     
