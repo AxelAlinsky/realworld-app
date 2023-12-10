@@ -55,6 +55,10 @@ const Register = () => {
       <p>
         Already have an account? <Link to="/">Login here</Link>
       </p>
+      <div className="alert-footer">
+        <span className="alert-icon">&#9888;</span> {/* Example: Exclamation mark icon */}
+        <p>Please note: This is a demo application. Avoid using real personal details for login or registration.</p>
+      </div>
     </div>
 );
 
